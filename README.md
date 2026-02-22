@@ -1,17 +1,51 @@
-# kasumi_quran_vault.json
-A clean Next.js boilerplate for uploading files and JSON to IPFS via Pinata. Secure, fast, and scalable. Perfect for NFT minting, Web3 storage, and decentralized apps.
-npx create-next-app@latest pinata-next
-cd pinata-next
-npm run dev
-git init
-git add .
-git commit -m "init nextjs + pinata uploader"
-git remote add origin https://github.com/USERNAME/NAMA-REPO.git
-git branch -M main
-git push -u origin main
-pinata-next/
- ├─ app/
- │   ├─ api/pinata/json/route.js
- │   └─ upload/page.jsx
- ├─ .env.local   ❌ (JANGAN di-push)
- ├─ package.json
+import { PinataSDK } from "pinata";
+
+const pinata = new PinataSDK({
+  pinataJwt: process.env.PINATA_JWT!,
+  pinataGateway: "example-gateway.mypinata.cloud",
+});
+
+const upload = await pinata.upload.public.json({
+    content: "console.log('hello world!)",
+    name: "helloworld.ts",
+    lang: "ts"
+})
+type UploadResponse = {
+	id: string;
+	name: string;
+	cid: string;
+	size: number;
+	created_at: string;
+	number_of_files: number;
+	mime_type: string;
+	group_id: string | null;
+	keyvalues: {
+		[key: string]: string;
+	};
+	vectorized: boolean;
+	network: string;
+};const upload = await pinata.upload.public.json({
+    content: "console.log('hello world!)",
+    name: "helloworld.ts",
+    lang: "ts"
+})const upload = await pinata.upload.public
+  .json({
+    content: "console.log('hello world!)",
+    name: "helloworld.ts",
+    lang: "ts"
+  })
+  .group("b07da1ff-efa4-49af-bdea-9d95d8881103")const upload = await pinata.upload.public
+  .json({
+    content: "console.log('hello world!)",
+    name: "helloworld.ts",
+    lang: "ts"
+  })
+  .keyvalues({
+    env: "prod"
+  })const upload = await pinata.upload.public
+  .json({
+    content: "console.log('hello world!)",
+    name: "helloworld.ts",
+    lang: "ts"
+  })
+  .name("metadata.json")
